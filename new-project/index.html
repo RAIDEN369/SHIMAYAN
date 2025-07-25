@@ -524,9 +524,9 @@
     <!-- Hero Section -->
     <section id="home" class="hero">
         <!-- Background Video -->
-        <video id="heroVideo" class="hero-video" muted loop playsinline webkit-playsinline poster="images/IMG_2253.jpg" preload="metadata">
-            <source src="videos/ScreenRecording_07-25-2025 17-34-33_1.mov" type="video/mp4">
-            <source src="videos/ScreenRecording_07-25-2025 17-35-18_1.mov" type="video/mp4">
+        <video id="heroVideo" class="hero-video" muted loop playsinline webkit-playsinline poster="images/IMG_2253.jpg" preload="none">
+            <source src="videos/ScreenRecording_07-25-2025 17-34-33_1.mov" type="video/quicktime">
+            <source src="videos/ScreenRecording_07-25-2025 17-35-18_1.mov" type="video/quicktime">
             <!-- Fallback for browsers that don't support video -->
         </video>
         
@@ -826,37 +826,59 @@
         // Play video function
         function playVideo() {
             if (video && !videoPlayed) {
-                video.muted = true;
-                const playPromise = video.play();
+                console.log('Attempting to play video...');
                 
-                if (playPromise !== undefined) {
-                    playPromise.then(() => {
-                        videoPlayed = true;
-                        if (playButton) {
-                            playButton.style.display = 'none';
-                        }
-                        console.log('Video started playing');
-                    }).catch(error => {
-                        console.log('Autoplay prevented:', error);
-                        // Show play button if autoplay fails
-                        if (playButton && isMobileDevice()) {
-                            playButton.style.display = 'block';
-                        }
-                    });
-                }
+                // Force video settings for iOS
+                video.muted = true;
+                video.playsInline = true;
+                video.setAttribute('playsinline', '');
+                video.setAttribute('webkit-playsinline', '');
+                
+                // Load video first
+                video.load();
+                
+                setTimeout(() => {
+                    const playPromise = video.play();
+                    
+                    if (playPromise !== undefined) {
+                        playPromise.then(() => {
+                            videoPlayed = true;
+                            if (playButton) {
+                                playButton.style.display = 'none';
+                            }
+                            console.log('✅ Video started playing successfully');
+                        }).catch(error => {
+                            console.log('❌ Autoplay prevented:', error);
+                            // Always show play button on mobile if autoplay fails
+                            if (playButton) {
+                                playButton.style.display = 'block';
+                                playButton.innerHTML = '<i class="fas fa-play"></i>';
+                            }
+                        });
+                    }
+                }, 100);
             }
         }
 
-        // Try autoplay on page load
+        // Initialize video system
         document.addEventListener('DOMContentLoaded', function() {
+            console.log('Page loaded, initializing video...');
+            
+            // Show play button immediately on mobile
+            if (isMobileDevice() && playButton) {
+                playButton.style.display = 'block';
+                console.log('Mobile detected - showing play button');
+            }
+            
             setTimeout(() => {
                 if (!isMobileDevice()) {
+                    // Try autoplay on desktop
                     playVideo();
                 } else {
-                    // On mobile, try autoplay but expect it to fail
-                    playVideo();
+                    // On mobile, just try once but don't expect success
+                    console.log('Mobile device - waiting for user interaction');
                 }
-            }, 500);
+            }, 1000);
         });
 
         // Play button click handler
