@@ -80,19 +80,10 @@
             color: white;
             position: relative;
             overflow: hidden;
+            background: url('images/IMG_2253.jpg') center/cover no-repeat;
         }
 
-        .hero-video {
-            position: absolute;
-            top: 50%;
-            left: 50%;
-            width: 100%;
-            height: 100%;
-            object-fit: cover;
-            transform: translate(-50%, -50%);
-            z-index: -2;
-        }
-
+        /* Animated background overlay */
         .hero::before {
             content: '';
             position: absolute;
@@ -100,20 +91,126 @@
             left: 0;
             right: 0;
             bottom: 0;
-            background: linear-gradient(135deg, rgba(77, 101, 255, 0.7) 0%, rgba(156, 39, 176, 0.7) 100%);
-            z-index: -1;
+            background: 
+                linear-gradient(45deg, transparent 30%, rgba(77, 101, 255, 0.3) 50%, transparent 70%),
+                linear-gradient(-45deg, transparent 30%, rgba(156, 39, 176, 0.3) 50%, transparent 70%),
+                linear-gradient(135deg, rgba(77, 101, 255, 0.6) 0%, rgba(156, 39, 176, 0.6) 100%);
+            animation: dance-energy 4s ease-in-out infinite;
+            z-index: 1;
         }
 
-        /* Fallback background for when video is not available */
+        /* Animated particles */
         .hero::after {
             content: '';
             position: absolute;
             top: 0;
             left: 0;
-            right: 0;
-            bottom: 0;
-            background: linear-gradient(135deg, #4d65ff 0%, #9c27b0 100%);
-            z-index: -3;
+            width: 100%;
+            height: 100%;
+            background-image: 
+                radial-gradient(2px 2px at 20px 30px, rgba(255, 255, 255, 0.3), transparent),
+                radial-gradient(2px 2px at 40px 70px, rgba(255, 255, 255, 0.2), transparent),
+                radial-gradient(1px 1px at 90px 40px, rgba(255, 255, 255, 0.4), transparent),
+                radial-gradient(1px 1px at 130px 80px, rgba(255, 255, 255, 0.3), transparent),
+                radial-gradient(2px 2px at 160px 30px, rgba(255, 255, 255, 0.2), transparent);
+            background-repeat: repeat;
+            background-size: 200px 100px;
+            animation: particles-float 6s linear infinite;
+            z-index: 0;
+        }
+
+        /* Dance energy animation */
+        @keyframes dance-energy {
+            0%, 100% { 
+                transform: translateX(0) scale(1);
+                opacity: 0.8;
+            }
+            25% { 
+                transform: translateX(-10px) scale(1.02);
+                opacity: 0.9;
+            }
+            50% { 
+                transform: translateX(5px) scale(0.98);
+                opacity: 0.7;
+            }
+            75% { 
+                transform: translateX(-5px) scale(1.01);
+                opacity: 0.85;
+            }
+        }
+
+        /* Floating particles */
+        @keyframes particles-float {
+            0% { transform: translateY(100vh) translateX(0px); }
+            100% { transform: translateY(-100px) translateX(100px); }
+        }
+
+        /* Dance particles */
+        .dance-particles {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            z-index: 0;
+        }
+
+        .particle {
+            position: absolute;
+            width: 6px;
+            height: 6px;
+            background: radial-gradient(circle, rgba(255, 255, 255, 0.8) 0%, transparent 70%);
+            border-radius: 50%;
+            animation: dance-particle 3s infinite ease-in-out;
+        }
+
+        .particle:nth-child(1) {
+            left: 20%;
+            animation-delay: 0s;
+            animation-duration: 4s;
+        }
+
+        .particle:nth-child(2) {
+            left: 40%;
+            animation-delay: 1s;
+            animation-duration: 3s;
+        }
+
+        .particle:nth-child(3) {
+            left: 60%;
+            animation-delay: 2s;
+            animation-duration: 5s;
+        }
+
+        .particle:nth-child(4) {
+            left: 80%;
+            animation-delay: 0.5s;
+            animation-duration: 3.5s;
+        }
+
+        .particle:nth-child(5) {
+            left: 10%;
+            animation-delay: 1.5s;
+            animation-duration: 4.5s;
+        }
+
+        @keyframes dance-particle {
+            0%, 100% {
+                transform: translateY(100vh) translateX(0px) scale(0);
+                opacity: 0;
+            }
+            10% {
+                transform: translateY(90vh) translateX(10px) scale(1);
+                opacity: 1;
+            }
+            50% {
+                transform: translateY(50vh) translateX(-20px) scale(1.2);
+                opacity: 0.8;
+            }
+            90% {
+                transform: translateY(10vh) translateX(15px) scale(0.8);
+                opacity: 0.6;
+            }
         }
 
         .hero-content {
@@ -416,41 +513,6 @@
             }
         }
 
-        /* Mobile fallback background */
-        .hero-mobile-bg {
-            display: none;
-            position: absolute;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            object-fit: cover;
-            z-index: -2;
-        }
-
-        /* Play button for mobile */
-        .video-play-button {
-            display: none;
-            position: absolute;
-            top: 50%;
-            left: 50%;
-            transform: translate(-50%, -50%);
-            background: rgba(77, 101, 255, 0.9);
-            color: white;
-            border: none;
-            border-radius: 50%;
-            width: 80px;
-            height: 80px;
-            font-size: 30px;
-            cursor: pointer;
-            z-index: 10;
-            transition: all 0.3s ease;
-        }
-
-        .video-play-button:hover {
-            background: rgba(77, 101, 255, 1);
-            transform: translate(-50%, -50%) scale(1.1);
-        }
 
         /* Responsive Design */
         @media (max-width: 768px) {
@@ -470,18 +532,6 @@
                 font-size: 1.2rem;
             }
 
-            /* Show video on mobile but with controls */
-            .hero-video {
-                display: block;
-            }
-
-            .hero-mobile-bg {
-                display: none;
-            }
-
-            .video-play-button {
-                display: block;
-            }
 
             .hero::after {
                 z-index: -1;
@@ -523,22 +573,14 @@
 
     <!-- Hero Section -->
     <section id="home" class="hero">
-        <!-- Background Video -->
-        <video id="heroVideo" class="hero-video" muted loop playsinline webkit-playsinline poster="images/IMG_2253.jpg" preload="auto">
-            <!-- Use a test MP4 video that works on iOS -->
-            <source src="https://commondatastorage.googleapis.com/gtv-videos-bucket/sample/BigBuckBunny.mp4" type="video/mp4">
-            <!-- Fallback to local videos -->
-            <source src="videos/ScreenRecording_07-25-2025 17-34-33_1.mov" type="video/quicktime">
-            <!-- Fallback for browsers that don't support video -->
-        </video>
-        
-        <!-- Play button for mobile -->
-        <button id="videoPlayButton" class="video-play-button">
-            <i class="fas fa-play"></i>
-        </button>
-        
-        <!-- Mobile fallback background image -->
-        <img class="hero-mobile-bg" src="images/IMG_2253.jpg" alt="RYOTARO Background">
+        <!-- Animated Background Elements -->
+        <div class="dance-particles">
+            <div class="particle"></div>
+            <div class="particle"></div>
+            <div class="particle"></div>
+            <div class="particle"></div>
+            <div class="particle"></div>
+        </div>
         
         <div class="hero-content">
             <h1>RYOTARO</h1>
@@ -815,51 +857,8 @@
             observer.observe(el);
         });
 
-        // Simple video control system
-        const video = document.getElementById('heroVideo');
-        const playButton = document.getElementById('videoPlayButton');
-
-        // Check if device is mobile
-        function isMobileDevice() {
-            return /Android|webOS|iPhone|iPad|iPod|BlackBerry|IEMobile|Opera Mini/i.test(navigator.userAgent);
-        }
-
-        // Simple play function
-        function playVideo() {
-            if (video) {
-                console.log('🎬 Playing video...');
-                video.muted = true;
-                video.play().then(() => {
-                    console.log('✅ Video playing!');
-                    if (playButton) playButton.style.display = 'none';
-                }).catch(e => {
-                    console.log('❌ Play failed:', e);
-                    if (playButton) playButton.style.display = 'block';
-                });
-            }
-        }
-
-        // Initialize
-        document.addEventListener('DOMContentLoaded', function() {
-            console.log('📱 Device:', isMobileDevice() ? 'Mobile' : 'Desktop');
-            
-            // Always show play button on mobile
-            if (isMobileDevice() && playButton) {
-                playButton.style.display = 'block';
-            }
-            
-            // Try autoplay (will fail on mobile)
-            setTimeout(playVideo, 500);
-        });
-
-        // Play button click
-        if (playButton) {
-            playButton.addEventListener('click', playVideo);
-        }
-
-        // Try play on first interaction
-        document.addEventListener('touchstart', playVideo, { once: true });
-        document.addEventListener('click', playVideo, { once: true });
+        // Clean animations - no video needed
+        console.log('🎭 RYOTARO Portfolio - Pure CSS Animations');
     </script>
 </body>
 </html>
