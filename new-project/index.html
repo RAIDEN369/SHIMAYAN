@@ -524,9 +524,11 @@
     <!-- Hero Section -->
     <section id="home" class="hero">
         <!-- Background Video -->
-        <video id="heroVideo" class="hero-video" muted loop playsinline webkit-playsinline poster="images/IMG_2253.jpg" preload="none">
+        <video id="heroVideo" class="hero-video" muted loop playsinline webkit-playsinline poster="images/IMG_2253.jpg" preload="auto">
+            <!-- Use a test MP4 video that works on iOS -->
+            <source src="https://commondatastorage.googleapis.com/gtv-videos-bucket/sample/BigBuckBunny.mp4" type="video/mp4">
+            <!-- Fallback to local videos -->
             <source src="videos/ScreenRecording_07-25-2025 17-34-33_1.mov" type="video/quicktime">
-            <source src="videos/ScreenRecording_07-25-2025 17-35-18_1.mov" type="video/quicktime">
             <!-- Fallback for browsers that don't support video -->
         </video>
         
@@ -813,94 +815,51 @@
             observer.observe(el);
         });
 
-        // Video control system
+        // Simple video control system
         const video = document.getElementById('heroVideo');
         const playButton = document.getElementById('videoPlayButton');
-        let videoPlayed = false;
 
         // Check if device is mobile
         function isMobileDevice() {
             return /Android|webOS|iPhone|iPad|iPod|BlackBerry|IEMobile|Opera Mini/i.test(navigator.userAgent);
         }
 
-        // Play video function
+        // Simple play function
         function playVideo() {
-            if (video && !videoPlayed) {
-                console.log('Attempting to play video...');
-                
-                // Force video settings for iOS
+            if (video) {
+                console.log('🎬 Playing video...');
                 video.muted = true;
-                video.playsInline = true;
-                video.setAttribute('playsinline', '');
-                video.setAttribute('webkit-playsinline', '');
-                
-                // Load video first
-                video.load();
-                
-                setTimeout(() => {
-                    const playPromise = video.play();
-                    
-                    if (playPromise !== undefined) {
-                        playPromise.then(() => {
-                            videoPlayed = true;
-                            if (playButton) {
-                                playButton.style.display = 'none';
-                            }
-                            console.log('✅ Video started playing successfully');
-                        }).catch(error => {
-                            console.log('❌ Autoplay prevented:', error);
-                            // Always show play button on mobile if autoplay fails
-                            if (playButton) {
-                                playButton.style.display = 'block';
-                                playButton.innerHTML = '<i class="fas fa-play"></i>';
-                            }
-                        });
-                    }
-                }, 100);
+                video.play().then(() => {
+                    console.log('✅ Video playing!');
+                    if (playButton) playButton.style.display = 'none';
+                }).catch(e => {
+                    console.log('❌ Play failed:', e);
+                    if (playButton) playButton.style.display = 'block';
+                });
             }
         }
 
-        // Initialize video system
+        // Initialize
         document.addEventListener('DOMContentLoaded', function() {
-            console.log('Page loaded, initializing video...');
+            console.log('📱 Device:', isMobileDevice() ? 'Mobile' : 'Desktop');
             
-            // Show play button immediately on mobile
+            // Always show play button on mobile
             if (isMobileDevice() && playButton) {
                 playButton.style.display = 'block';
-                console.log('Mobile detected - showing play button');
             }
             
-            setTimeout(() => {
-                if (!isMobileDevice()) {
-                    // Try autoplay on desktop
-                    playVideo();
-                } else {
-                    // On mobile, just try once but don't expect success
-                    console.log('Mobile device - waiting for user interaction');
-                }
-            }, 1000);
+            // Try autoplay (will fail on mobile)
+            setTimeout(playVideo, 500);
         });
 
-        // Play button click handler
+        // Play button click
         if (playButton) {
-            playButton.addEventListener('click', function() {
-                playVideo();
-            });
+            playButton.addEventListener('click', playVideo);
         }
 
-        // Try to play on any user interaction
-        let userInteracted = false;
-        function handleUserInteraction() {
-            if (!userInteracted && !videoPlayed) {
-                userInteracted = true;
-                playVideo();
-            }
-        }
-
-        // Add interaction listeners
-        ['touchstart', 'touchend', 'mousedown', 'keydown', 'scroll'].forEach(event => {
-            document.addEventListener(event, handleUserInteraction, { passive: true, once: true });
-        });
+        // Try play on first interaction
+        document.addEventListener('touchstart', playVideo, { once: true });
+        document.addEventListener('click', playVideo, { once: true });
     </script>
 </body>
 </html>
