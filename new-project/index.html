@@ -496,7 +496,7 @@
     <!-- Hero Section -->
     <section id="home" class="hero">
         <!-- Background Video -->
-        <video class="hero-video" autoplay muted loop playsinline webkit-playsinline>
+        <video class="hero-video" autoplay muted loop playsinline webkit-playsinline poster="images/IMG_2253.jpg">
             <source src="videos/ScreenRecording_07-25-2025 17-34-33_1.mov" type="video/mp4">
             <source src="videos/ScreenRecording_07-25-2025 17-35-18_1.mov" type="video/mp4">
             <!-- Fallback for browsers that don't support video -->
@@ -778,6 +778,40 @@
             el.style.transform = 'translateY(30px)';
             el.style.transition = 'opacity 0.6s ease, transform 0.6s ease';
             observer.observe(el);
+        });
+
+        // iOS video autoplay fix
+        function enableVideoAutoplay() {
+            const video = document.querySelector('.hero-video');
+            if (video) {
+                video.muted = true;
+                video.play().catch(e => {
+                    console.log('Autoplay prevented:', e);
+                });
+            }
+        }
+
+        // Enable video autoplay on first user interaction
+        let hasInteracted = false;
+        function handleFirstInteraction() {
+            if (!hasInteracted) {
+                hasInteracted = true;
+                enableVideoAutoplay();
+                // Remove event listeners after first interaction
+                document.removeEventListener('touchstart', handleFirstInteraction);
+                document.removeEventListener('click', handleFirstInteraction);
+                document.removeEventListener('scroll', handleFirstInteraction);
+            }
+        }
+
+        // Add event listeners for user interaction
+        document.addEventListener('touchstart', handleFirstInteraction, { passive: true });
+        document.addEventListener('click', handleFirstInteraction);
+        document.addEventListener('scroll', handleFirstInteraction, { passive: true });
+
+        // Also try to play video when page loads
+        document.addEventListener('DOMContentLoaded', function() {
+            setTimeout(enableVideoAutoplay, 1000);
         });
     </script>
 </body>
