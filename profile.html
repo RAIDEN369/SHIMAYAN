@@ -1,0 +1,262 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Profile - 小山悠 YU OYAMA</title>
+    <meta name="description" content="俳優・小山悠のプロフィール">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Helvetica+Neue:wght@300;400;500;700&display=swap" rel="stylesheet">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: "Helvetica Neue", Arial, sans-serif;
+            background: #ffffff;
+            color: #000000;
+            line-height: 1.4;
+            font-weight: 300;
+            overflow-x: hidden;
+        }
+
+        /* Navigation */
+        .header {
+            position: fixed;
+            top: 0;
+            left: 0;
+            right: 0;
+            z-index: 1000;
+            background: rgba(255, 255, 255, 0.95);
+            backdrop-filter: blur(10px);
+            padding: 20px 40px;
+        }
+
+        .nav-container {
+            max-width: 1200px;
+            margin: 0 auto;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .logo {
+            font-size: 18px;
+            font-weight: 500;
+            color: #000;
+            text-decoration: none;
+            letter-spacing: 2px;
+        }
+
+        .nav-menu {
+            display: flex;
+            list-style: none;
+            gap: 40px;
+        }
+
+        .nav-menu a {
+            text-decoration: none;
+            color: #000;
+            font-size: 14px;
+            font-weight: 400;
+            letter-spacing: 1px;
+            transition: opacity 0.3s ease;
+        }
+
+        .nav-menu a:hover {
+            opacity: 0.6;
+        }
+
+        .nav-menu a.active {
+            opacity: 0.6;
+        }
+
+        /* Main Content */
+        .main-content {
+            margin-top: 80px;
+            padding: 80px 40px;
+            background: #ffffff;
+        }
+
+        .profile-container {
+            max-width: 1000px;
+            margin: 0 auto;
+        }
+
+        .section-title {
+            font-size: 28px;
+            font-weight: 300;
+            text-align: center;
+            margin-bottom: 60px;
+            letter-spacing: 3px;
+            color: #000;
+        }
+
+        .profile-content {
+            display: grid;
+            grid-template-columns: 1fr 2fr;
+            gap: 60px;
+            align-items: start;
+        }
+
+        .profile-image {
+            width: 100%;
+            aspect-ratio: 3/4;
+            object-fit: cover;
+        }
+
+        .profile-info h3 {
+            font-size: 24px;
+            font-weight: 300;
+            margin-bottom: 30px;
+            letter-spacing: 1px;
+            color: #000;
+        }
+
+        .profile-details {
+            margin-bottom: 40px;
+        }
+
+        .detail-row {
+            display: flex;
+            justify-content: space-between;
+            padding: 15px 0;
+            border-bottom: 1px solid #e0e0e0;
+            font-size: 14px;
+        }
+
+        .detail-label {
+            color: #666;
+            font-weight: 400;
+            letter-spacing: 1px;
+        }
+
+        .detail-value {
+            color: #000;
+            font-weight: 300;
+        }
+
+        .profile-description {
+            color: #666;
+            line-height: 1.6;
+            font-size: 14px;
+            font-weight: 300;
+        }
+
+        /* Footer */
+        .footer {
+            padding: 40px;
+            background: #ffffff;
+            text-align: center;
+            border-top: 1px solid #e0e0e0;
+        }
+
+        .footer p {
+            font-size: 12px;
+            color: #999;
+            font-weight: 300;
+        }
+
+        /* Mobile Responsive */
+        @media (max-width: 768px) {
+            .header {
+                padding: 15px 20px;
+            }
+
+            .nav-menu {
+                display: none;
+            }
+
+            .main-content {
+                padding: 60px 20px;
+            }
+
+            .profile-content {
+                grid-template-columns: 1fr;
+                gap: 40px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- Header Navigation -->
+    <header class="header">
+        <div class="nav-container">
+            <a href="index.html" class="logo">YU OYAMA</a>
+            <nav>
+                <ul class="nav-menu">
+                    <li><a href="index.html">HOME</a></li>
+                    <li><a href="profile.html" class="active">PROFILE</a></li>
+                    <li><a href="works.html">WORKS</a></li>
+                    <li><a href="contact.html">CONTACT</a></li>
+                </ul>
+            </nav>
+        </div>
+    </header>
+
+    <!-- Main Content -->
+    <main class="main-content">
+        <div class="profile-container">
+            <h2 class="section-title">PROFILE</h2>
+            <div class="profile-content">
+                <div>
+                    <img src="IMG_2293.jpg" alt="小山悠 プロフィール" class="profile-image">
+                </div>
+                <div class="profile-info">
+                    <h3>小山悠</h3>
+                    <div class="profile-details">
+                        <div class="detail-row">
+                            <span class="detail-label">生年月日</span>
+                            <span class="detail-value">1993年11月</span>
+                        </div>
+                        <div class="detail-row">
+                            <span class="detail-label">出身地</span>
+                            <span class="detail-value">鹿児島県</span>
+                        </div>
+                        <div class="detail-row">
+                            <span class="detail-label">身長</span>
+                            <span class="detail-value">181cm</span>
+                        </div>
+                        <div class="detail-row">
+                            <span class="detail-label">趣味</span>
+                            <span class="detail-value">音楽、温泉、旅行</span>
+                        </div>
+                        <div class="detail-row">
+                            <span class="detail-label">特技</span>
+                            <span class="detail-value">サッカー、ボクシング、麻雀</span>
+                        </div>
+                        <div class="detail-row">
+                            <span class="detail-label">方言</span>
+                            <span class="detail-value">鹿児島弁、宮崎弁、博多弁</span>
+                        </div>
+                    </div>
+                    <div class="profile-description">
+                        鹿児島県出身の俳優。映画、テレビドラマ、舞台など幅広いジャンルで活動中。8年間のサッカー経験を活かしたアクションシーンや、方言を生かした役作りを得意とする。
+                    </div>
+                </div>
+            </div>
+        </div>
+    </main>
+
+    <!-- Footer -->
+    <footer class="footer">
+        <p>&copy; 2024 Yu Oyama. All rights reserved.</p>
+    </footer>
+
+    <script>
+        // Header background opacity on scroll
+        window.addEventListener('scroll', function() {
+            const header = document.querySelector('.header');
+            if (window.scrollY > 50) {
+                header.style.background = 'rgba(255, 255, 255, 0.98)';
+            } else {
+                header.style.background = 'rgba(255, 255, 255, 0.95)';
+            }
+        });
+    </script>
+</body>
+</html>
