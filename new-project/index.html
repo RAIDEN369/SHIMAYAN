@@ -326,6 +326,104 @@
             border-bottom: none;
         }
 
+        /* Videos Section */
+        .videos {
+            background: white;
+        }
+
+        .videos-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(400px, 1fr));
+            gap: 3rem;
+            margin-top: 2rem;
+        }
+
+        .video-card {
+            background: white;
+            border-radius: 20px;
+            overflow: hidden;
+            box-shadow: 0 15px 40px rgba(0, 0, 0, 0.1);
+            transition: all 0.3s ease;
+        }
+
+        .video-card:hover {
+            transform: translateY(-10px);
+            box-shadow: 0 25px 60px rgba(0, 0, 0, 0.15);
+        }
+
+        .video-wrapper {
+            position: relative;
+            width: 100%;
+            height: 250px;
+            overflow: hidden;
+        }
+
+        .video-wrapper iframe {
+            width: 100%;
+            height: 100%;
+            border: none;
+        }
+
+        .video-info {
+            padding: 2rem;
+        }
+
+        .video-title {
+            font-size: 1.3rem;
+            font-weight: 600;
+            margin-bottom: 0.5rem;
+            color: #333;
+        }
+
+        .video-artist {
+            font-size: 1.1rem;
+            color: #4d65ff;
+            font-weight: 500;
+            margin-bottom: 1rem;
+        }
+
+        .video-description {
+            color: #666;
+            line-height: 1.6;
+        }
+
+        .video-thumbnail {
+            position: relative;
+            width: 100%;
+            height: 100%;
+            cursor: pointer;
+            overflow: hidden;
+        }
+
+        .play-overlay {
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            background: rgba(255, 0, 0, 0.9);
+            color: white;
+            padding: 12px 20px;
+            border-radius: 25px;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            font-weight: 600;
+            transition: all 0.3s ease;
+            opacity: 0;
+        }
+
+        .video-thumbnail:hover .play-overlay {
+            opacity: 1;
+        }
+
+        .video-thumbnail:hover img {
+            transform: scale(1.05);
+        }
+
+        .video-thumbnail img {
+            transition: transform 0.3s ease;
+        }
+
         /* Skills Section */
         .skills {
             background: #f8f9fa;
@@ -423,6 +521,15 @@
                 grid-template-columns: 1fr;
             }
 
+            .videos-grid {
+                grid-template-columns: 1fr;
+                gap: 2rem;
+            }
+
+            .video-wrapper {
+                height: 200px;
+            }
+
             .social-links {
                 flex-wrap: wrap;
             }
@@ -443,6 +550,7 @@
                 <li><a href="#home">Home</a></li>
                 <li><a href="#about">About</a></li>
                 <li><a href="#experience">Experience</a></li>
+                <li><a href="#videos">Videos</a></li>
                 <li><a href="#skills">Skills</a></li>
                 <li><a href="#contact">Contact</a></li>
             </ul>
@@ -571,6 +679,54 @@
                         <li>HIKAKIN & SEIKIN Collaborations</li>
                         <li>MYNAME Concert Tours</li>
                     </ul>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Videos Section -->
+    <section id="videos" class="videos section">
+        <div class="container">
+            <h2 class="section-title">Featured Performances</h2>
+            <div class="videos-grid">
+                <div class="video-card">
+                    <div class="video-wrapper">
+                        <div class="video-thumbnail" onclick="openYouTube('https://youtu.be/x2rvSf0STBM')">
+                            <img src="https://img.youtube.com/vi/x2rvSf0STBM/maxresdefault.jpg" alt="Mrs. GREEN APPLE - ダンスホール" style="width: 100%; height: 100%; object-fit: cover;">
+                            <div class="play-overlay">
+                                <i class="fab fa-youtube"></i>
+                                <span>YouTubeで見る</span>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="video-info">
+                        <h3 class="video-title">ダンスホール</h3>
+                        <div class="video-artist">Mrs. GREEN APPLE</div>
+                        <p class="video-description">
+                            人気バンドMrs. GREEN APPLEの楽曲「ダンスホール」のミュージックビデオにバックダンサーとして出演。
+                            エネルギッシュなパフォーマンスで楽曲の世界観を表現しています。
+                        </p>
+                    </div>
+                </div>
+
+                <div class="video-card">
+                    <div class="video-wrapper">
+                        <iframe 
+                            src="https://www.youtube.com/embed/ZKS-jf1c9rM?rel=0&modestbranding=1" 
+                            title="嵐 - Find The Answer" 
+                            frameborder="0"
+                            allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+                            allowfullscreen>
+                        </iframe>
+                    </div>
+                    <div class="video-info">
+                        <h3 class="video-title">Find The Answer</h3>
+                        <div class="video-artist">嵐</div>
+                        <p class="video-description">
+                            国民的アイドルグループ嵐の楽曲「Find The Answer」のミュージックビデオに出演。
+                            洗練されたダンスパフォーマンスで楽曲に華を添えています。
+                        </p>
+                    </div>
                 </div>
             </div>
         </div>
@@ -738,12 +894,17 @@
         }, observerOptions);
 
         // Observe all cards and sections
-        document.querySelectorAll('.experience-card, .skill-card').forEach(el => {
+        document.querySelectorAll('.experience-card, .skill-card, .video-card').forEach(el => {
             el.style.opacity = '0';
             el.style.transform = 'translateY(30px)';
             el.style.transition = 'opacity 0.6s ease, transform 0.6s ease';
             observer.observe(el);
         });
+
+        // Open YouTube video in new tab
+        function openYouTube(url) {
+            window.open(url, '_blank');
+        }
     </script>
 </body>
 </html>
