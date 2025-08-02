@@ -1,0 +1,346 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Biography - 小山悠 YU OYAMA</title>
+    <meta name="description" content="俳優・小山悠の経歴">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Helvetica+Neue:wght@300;400;500;700&display=swap" rel="stylesheet">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: "Helvetica Neue", Arial, sans-serif;
+            background: #ffffff;
+            color: #000000;
+            line-height: 1.4;
+            font-weight: 300;
+            overflow-x: hidden;
+        }
+
+        /* Navigation */
+        .header {
+            position: fixed;
+            top: 0;
+            left: 0;
+            right: 0;
+            z-index: 1000;
+            background: rgba(255, 255, 255, 0.95);
+            backdrop-filter: blur(10px);
+            padding: 20px 40px;
+        }
+
+        .nav-container {
+            max-width: 1200px;
+            margin: 0 auto;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .logo {
+            font-size: 18px;
+            font-weight: 500;
+            color: #000;
+            text-decoration: none;
+            letter-spacing: 2px;
+        }
+
+        .nav-menu {
+            display: flex;
+            list-style: none;
+            gap: 40px;
+        }
+
+        .nav-menu a {
+            text-decoration: none;
+            color: #000;
+            font-size: 14px;
+            font-weight: 400;
+            letter-spacing: 1px;
+            transition: opacity 0.3s ease;
+        }
+
+        .nav-menu a:hover {
+            opacity: 0.6;
+        }
+
+        .nav-menu a.active {
+            opacity: 0.6;
+        }
+
+        /* Main Content */
+        .main-content {
+            margin-top: 80px;
+            padding: 80px 40px;
+            background: #ffffff;
+        }
+
+        .biography-container {
+            max-width: 800px;
+            margin: 0 auto;
+        }
+
+        .section-title {
+            font-size: 28px;
+            font-weight: 300;
+            text-align: center;
+            margin-bottom: 60px;
+            letter-spacing: 3px;
+            color: #000;
+        }
+
+        .biography-section {
+            margin-bottom: 50px;
+        }
+
+        .category-title {
+            font-size: 16px;
+            font-weight: 500;
+            margin-bottom: 20px;
+            color: #000;
+            letter-spacing: 1px;
+            text-transform: uppercase;
+        }
+
+        .work-list {
+            list-style: none;
+            margin-bottom: 40px;
+        }
+
+        .work-item {
+            display: flex;
+            padding: 8px 0;
+            border-bottom: 1px solid #f0f0f0;
+            font-size: 13px;
+            font-weight: 300;
+        }
+
+        .work-item:last-child {
+            border-bottom: none;
+        }
+
+        .work-year {
+            color: #000;
+            font-weight: 400;
+            min-width: 50px;
+            margin-right: 20px;
+        }
+
+        .work-title {
+            color: #666;
+            flex: 1;
+        }
+
+        .work-role {
+            color: #999;
+            font-style: italic;
+            margin-left: 10px;
+        }
+
+        /* Footer */
+        .footer {
+            padding: 40px;
+            background: #ffffff;
+            text-align: center;
+            border-top: 1px solid #e0e0e0;
+        }
+
+        .footer p {
+            font-size: 12px;
+            color: #999;
+            font-weight: 300;
+        }
+
+        /* Mobile Responsive */
+        @media (max-width: 768px) {
+            .header {
+                padding: 15px 20px;
+            }
+
+            .nav-menu {
+                display: none;
+            }
+
+            .main-content {
+                padding: 60px 20px;
+            }
+
+            .work-item {
+                flex-direction: column;
+            }
+
+            .work-year {
+                margin-right: 0;
+                margin-bottom: 5px;
+                min-width: auto;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- Header Navigation -->
+    <header class="header">
+        <div class="nav-container">
+            <a href="index.html" class="logo">YU OYAMA</a>
+            <nav>
+                <ul class="nav-menu">
+                    <li><a href="index.html">HOME</a></li>
+                    <li><a href="profile.html">PROFILE</a></li>
+                    <li><a href="biography.html" class="active">BIOGRAPHY</a></li>
+                    <li><a href="contact.html">CONTACT</a></li>
+                </ul>
+            </nav>
+        </div>
+    </header>
+
+    <!-- Main Content -->
+    <main class="main-content">
+        <div class="biography-container">
+            <h2 class="section-title">BIOGRAPHY</h2>
+            
+            <div class="biography-section">
+                <h3 class="category-title">MOVIE</h3>
+                <ul class="work-list">
+                    <li class="work-item">
+                        <span class="work-year">2024</span>
+                        <span class="work-title">きみは誰だ</span>
+                        <span class="work-role">主演</span>
+                    </li>
+                    <li class="work-item">
+                        <span class="work-year">2023</span>
+                        <span class="work-title">大綱引の恋</span>
+                    </li>
+                    <li class="work-item">
+                        <span class="work-year">2021</span>
+                        <span class="work-title">仮面ライダーゼロワン</span>
+                        <span class="work-role">仮面ライダーアドバンス役</span>
+                    </li>
+                    <li class="work-item">
+                        <span class="work-year">2020</span>
+                        <span class="work-title">アキラとあきら</span>
+                    </li>
+                    <li class="work-item">
+                        <span class="work-year">2019</span>
+                        <span class="work-title">雪風</span>
+                    </li>
+                </ul>
+            </div>
+
+            <div class="biography-section">
+                <h3 class="category-title">DRAMA</h3>
+                <ul class="work-list">
+                    <li class="work-item">
+                        <span class="work-year">2022</span>
+                        <span class="work-title">オールドルーキー</span>
+                        <span class="work-role">葛原雄太役</span>
+                    </li>
+                    <li class="work-item">
+                        <span class="work-year">2021</span>
+                        <span class="work-title">相棒 season19</span>
+                        <span class="work-role">北原洋介役</span>
+                    </li>
+                    <li class="work-item">
+                        <span class="work-year">2020</span>
+                        <span class="work-title">NHK連続テレビ小説「エール」</span>
+                    </li>
+                    <li class="work-item">
+                        <span class="work-year">2019</span>
+                        <span class="work-title">NHK大河ドラマ「いだてん」</span>
+                    </li>
+                </ul>
+            </div>
+
+            <div class="biography-section">
+                <h3 class="category-title">STAGE</h3>
+                <ul class="work-list">
+                    <li class="work-item">
+                        <span class="work-year">2023</span>
+                        <span class="work-title">青！グランドウェディング</span>
+                    </li>
+                    <li class="work-item">
+                        <span class="work-year">2018-</span>
+                        <span class="work-title">劇団 角角鹿鹿</span>
+                        <span class="work-role">所属</span>
+                    </li>
+                    <li class="work-item">
+                        <span class="work-year">2018-2023</span>
+                        <span class="work-title">各種短編劇</span>
+                        <span class="work-role">複数作品出演</span>
+                    </li>
+                </ul>
+            </div>
+
+            <div class="biography-section">
+                <h3 class="category-title">MODEL</h3>
+                <ul class="work-list">
+                    <li class="work-item">
+                        <span class="work-year">2023</span>
+                        <span class="work-title">オニツカタイガー</span>
+                        <span class="work-role">ブランドモデル</span>
+                    </li>
+                    <li class="work-item">
+                        <span class="work-year">2022</span>
+                        <span class="work-title">上野コレクション</span>
+                        <span class="work-role">ファッションショー</span>
+                    </li>
+                    <li class="work-item">
+                        <span class="work-year">2021</span>
+                        <span class="work-title">Men's EQ</span>
+                        <span class="work-role">雑誌掲載</span>
+                    </li>
+                    <li class="work-item">
+                        <span class="work-year">2020-2023</span>
+                        <span class="work-title">ファッションショー</span>
+                        <span class="work-role">複数ブランド</span>
+                    </li>
+                </ul>
+            </div>
+
+            <div class="biography-section">
+                <h3 class="category-title">OTHER</h3>
+                <ul class="work-list">
+                    <li class="work-item">
+                        <span class="work-year">2024</span>
+                        <span class="work-title">第32回東京国際映画祭</span>
+                        <span class="work-role">新人俳優賞ノミネート</span>
+                    </li>
+                    <li class="work-item">
+                        <span class="work-year">2023</span>
+                        <span class="work-title">鹿児島県観光大使</span>
+                        <span class="work-role">任命</span>
+                    </li>
+                    <li class="work-item">
+                        <span class="work-year">2022</span>
+                        <span class="work-title">日本サッカー協会</span>
+                        <span class="work-role">PR活動参加</span>
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </main>
+
+    <!-- Footer -->
+    <footer class="footer">
+        <p>&copy; 2024 Yu Oyama. All rights reserved.</p>
+    </footer>
+
+    <script>
+        // Header background opacity on scroll
+        window.addEventListener('scroll', function() {
+            const header = document.querySelector('.header');
+            if (window.scrollY > 50) {
+                header.style.background = 'rgba(255, 255, 255, 0.98)';
+            } else {
+                header.style.background = 'rgba(255, 255, 255, 0.95)';
+            }
+        });
+    </script>
+</body>
+</html>
