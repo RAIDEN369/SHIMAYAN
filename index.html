@@ -1,0 +1,910 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>RYOTARO - Professional Dancer & Choreographer</title>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Inter', sans-serif;
+            line-height: 1.6;
+            color: #333;
+            overflow-x: hidden;
+        }
+
+        /* Navigation */
+        .navbar {
+            position: fixed;
+            top: 0;
+            width: 100%;
+            background: rgba(255, 255, 255, 0.95);
+            backdrop-filter: blur(10px);
+            z-index: 1000;
+            padding: 1rem 0;
+            transition: all 0.3s ease;
+        }
+
+        .nav-container {
+            max-width: 1200px;
+            margin: 0 auto;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 0 2rem;
+        }
+
+        .logo {
+            font-size: 1.5rem;
+            font-weight: 700;
+            color: #4d65ff;
+        }
+
+        .nav-links {
+            display: flex;
+            list-style: none;
+            gap: 2rem;
+        }
+
+        .nav-links a {
+            text-decoration: none;
+            color: #333;
+            font-weight: 500;
+            transition: color 0.3s ease;
+        }
+
+        .nav-links a:hover {
+            color: #4d65ff;
+        }
+
+        .mobile-menu {
+            display: none;
+            font-size: 1.5rem;
+            cursor: pointer;
+        }
+
+        /* Hero Section with Background Video */
+        .hero {
+            height: 100vh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            text-align: center;
+            color: white;
+            position: relative;
+            overflow: hidden;
+        }
+
+        /* Background Video */
+        .hero-video {
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            min-width: 100%;
+            min-height: 100%;
+            width: auto;
+            height: auto;
+            transform: translate(-50%, -50%);
+            z-index: 1;
+            object-fit: cover;
+        }
+
+        /* Video Overlay */
+        .hero-overlay {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(
+                135deg,
+                rgba(77, 101, 255, 0.7) 0%,
+                rgba(156, 39, 176, 0.7) 100%
+            );
+            z-index: 2;
+        }
+
+        /* Fallback Background */
+        .hero-fallback {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: url('images/IMG_2253.jpg') center/cover no-repeat;
+            z-index: 0;
+        }
+
+        .hero-content {
+            position: relative;
+            z-index: 3;
+            max-width: 800px;
+            padding: 0 2rem;
+        }
+
+        .hero h1 {
+            font-size: 4rem;
+            font-weight: 700;
+            margin-bottom: 1rem;
+            animation: fadeInUp 1s ease;
+        }
+
+        .hero-subtitle {
+            font-size: 1.5rem;
+            font-weight: 300;
+            margin-bottom: 2rem;
+            opacity: 0.9;
+            animation: fadeInUp 1s ease 0.2s both;
+        }
+
+        .hero-description {
+            font-size: 1.1rem;
+            margin-bottom: 3rem;
+            opacity: 0.8;
+            animation: fadeInUp 1s ease 0.4s both;
+        }
+
+        .cta-button {
+            display: inline-block;
+            padding: 15px 40px;
+            background: white;
+            color: #4d65ff;
+            text-decoration: none;
+            border-radius: 50px;
+            font-weight: 600;
+            transition: all 0.3s ease;
+            animation: fadeInUp 1s ease 0.6s both;
+        }
+
+        .cta-button:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.2);
+        }
+
+        /* Video Play Button for Mobile */
+        .video-play-btn {
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            width: 80px;
+            height: 80px;
+            background: rgba(77, 101, 255, 0.9);
+            border: none;
+            border-radius: 50%;
+            color: white;
+            font-size: 30px;
+            cursor: pointer;
+            z-index: 4;
+            transition: all 0.3s ease;
+            display: none;
+        }
+
+        .video-play-btn:hover {
+            background: rgba(77, 101, 255, 1);
+            transform: translate(-50%, -50%) scale(1.1);
+        }
+
+        .video-play-btn.show {
+            display: block;
+        }
+
+        /* Animations */
+        @keyframes fadeInUp {
+            from {
+                opacity: 0;
+                transform: translateY(30px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        /* Sections */
+        .section {
+            padding: 5rem 0;
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 2rem;
+        }
+
+        .section-title {
+            text-align: center;
+            font-size: 2.5rem;
+            font-weight: 700;
+            margin-bottom: 3rem;
+            color: #333;
+        }
+
+        /* About Section */
+        .about {
+            background: #f8f9fa;
+        }
+
+        .about-content {
+            display: grid;
+            grid-template-columns: 1fr 2fr;
+            gap: 4rem;
+            align-items: center;
+        }
+
+        .about-image {
+            width: 100%;
+            border-radius: 20px;
+            box-shadow: 0 20px 40px rgba(0, 0, 0, 0.1);
+        }
+
+        .about-text h3 {
+            font-size: 1.5rem;
+            color: #4d65ff;
+            margin-bottom: 1rem;
+        }
+
+        .about-text p {
+            font-size: 1.1rem;
+            margin-bottom: 1.5rem;
+            color: #666;
+        }
+
+        .stats {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 2rem;
+            margin-top: 2rem;
+        }
+
+        .stat {
+            text-align: center;
+        }
+
+        .stat-number {
+            font-size: 2rem;
+            font-weight: 700;
+            color: #4d65ff;
+        }
+
+        .stat-label {
+            font-size: 0.9rem;
+            color: #666;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+        }
+
+        /* Experience Section */
+        .experience-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 2rem;
+        }
+
+        .experience-card {
+            background: white;
+            padding: 2rem;
+            border-radius: 15px;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
+            transition: transform 0.3s ease;
+        }
+
+        .experience-card:hover {
+            transform: translateY(-5px);
+        }
+
+        .card-icon {
+            font-size: 2rem;
+            color: #4d65ff;
+            margin-bottom: 1rem;
+        }
+
+        .card-title {
+            font-size: 1.3rem;
+            font-weight: 600;
+            margin-bottom: 1rem;
+        }
+
+        .card-list {
+            list-style: none;
+        }
+
+        .card-list li {
+            padding: 0.5rem 0;
+            color: #666;
+            border-bottom: 1px solid #eee;
+        }
+
+        .card-list li:last-child {
+            border-bottom: none;
+        }
+
+        /* Videos Section */
+        .videos {
+            background: white;
+        }
+
+        .videos-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(400px, 1fr));
+            gap: 3rem;
+            margin-top: 2rem;
+        }
+
+        .video-card {
+            background: white;
+            border-radius: 20px;
+            overflow: hidden;
+            box-shadow: 0 15px 40px rgba(0, 0, 0, 0.1);
+            transition: all 0.3s ease;
+        }
+
+        .video-card:hover {
+            transform: translateY(-10px);
+            box-shadow: 0 25px 60px rgba(0, 0, 0, 0.15);
+        }
+
+        .video-wrapper {
+            position: relative;
+            width: 100%;
+            height: 250px;
+            overflow: hidden;
+        }
+
+        .video-wrapper iframe {
+            width: 100%;
+            height: 100%;
+            border: none;
+        }
+
+        .video-info {
+            padding: 2rem;
+        }
+
+        .video-title {
+            font-size: 1.3rem;
+            font-weight: 600;
+            margin-bottom: 0.5rem;
+            color: #333;
+        }
+
+        .video-artist {
+            font-size: 1.1rem;
+            color: #4d65ff;
+            font-weight: 500;
+            margin-bottom: 1rem;
+        }
+
+        .video-description {
+            color: #666;
+            line-height: 1.6;
+        }
+
+        .video-thumbnail {
+            position: relative;
+            width: 100%;
+            height: 100%;
+            cursor: pointer;
+            overflow: hidden;
+        }
+
+        .play-overlay {
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            background: rgba(255, 0, 0, 0.9);
+            color: white;
+            padding: 12px 20px;
+            border-radius: 25px;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            font-weight: 600;
+            transition: all 0.3s ease;
+            opacity: 0;
+        }
+
+        .video-thumbnail:hover .play-overlay {
+            opacity: 1;
+        }
+
+        .video-thumbnail:hover img {
+            transform: scale(1.05);
+        }
+
+        .video-thumbnail img {
+            transition: transform 0.3s ease;
+        }
+
+        /* Skills Section */
+        .skills {
+            background: #f8f9fa;
+        }
+
+        .skills-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 2rem;
+        }
+
+        .skill-card {
+            background: white;
+            padding: 2rem;
+            border-radius: 15px;
+            text-align: center;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
+        }
+
+        .skill-icon {
+            font-size: 3rem;
+            color: #4d65ff;
+            margin-bottom: 1rem;
+        }
+
+        .skill-title {
+            font-size: 1.2rem;
+            font-weight: 600;
+            margin-bottom: 1rem;
+        }
+
+        /* Contact Section */
+        .contact {
+            background: linear-gradient(135deg, #4d65ff 0%, #9c27b0 100%);
+            color: white;
+            text-align: center;
+        }
+
+        .contact .section-title {
+            color: white;
+        }
+
+        .social-links {
+            display: flex;
+            justify-content: center;
+            gap: 2rem;
+            margin-top: 2rem;
+        }
+
+        .social-link {
+            display: inline-block;
+            width: 60px;
+            height: 60px;
+            background: rgba(255, 255, 255, 0.2);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: white;
+            font-size: 1.5rem;
+            text-decoration: none;
+            transition: all 0.3s ease;
+        }
+
+        .social-link:hover {
+            background: white;
+            color: #4d65ff;
+            transform: translateY(-3px);
+        }
+
+        /* Responsive Design */
+        @media (max-width: 768px) {
+            .nav-links {
+                display: none;
+            }
+
+            .mobile-menu {
+                display: block;
+            }
+
+            .hero h1 {
+                font-size: 2.5rem;
+            }
+
+            .hero-subtitle {
+                font-size: 1.2rem;
+            }
+
+            .about-content {
+                grid-template-columns: 1fr;
+                gap: 2rem;
+            }
+
+            .stats {
+                grid-template-columns: 1fr;
+            }
+
+            .videos-grid {
+                grid-template-columns: 1fr;
+                gap: 2rem;
+            }
+
+            .video-wrapper {
+                height: 200px;
+            }
+
+            .social-links {
+                flex-wrap: wrap;
+            }
+
+            /* Show play button on mobile */
+            .video-play-btn.mobile {
+                display: block;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- Navigation -->
+    <nav class="navbar">
+        <div class="nav-container">
+            <div class="logo">RYOTARO</div>
+            <ul class="nav-links">
+                <li><a href="#home">Home</a></li>
+                <li><a href="#about">About</a></li>
+                <li><a href="#experience">Experience</a></li>
+                <li><a href="#videos">Videos</a></li>
+                <li><a href="#skills">Skills</a></li>
+                <li><a href="#contact">Contact</a></li>
+            </ul>
+            <div class="mobile-menu">
+                <i class="fas fa-bars"></i>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Hero Section -->
+    <section id="home" class="hero">
+        <!-- Fallback Background -->
+        <div class="hero-fallback"></div>
+        
+        <!-- Background Video -->
+        <video class="hero-video" autoplay muted loop playsinline>
+            <source src="https://sample-videos.com/zip/10/mp4/SampleVideo_1280x720_1mb.mp4" type="video/mp4">
+            <!-- Local video as fallback -->
+            <source src="videos/ScreenRecording_07-25-2025 17-34-33_1.mov" type="video/quicktime">
+        </video>
+        
+        <!-- Video Overlay -->
+        <div class="hero-overlay"></div>
+        
+        <!-- Play Button for Mobile -->
+        <button class="video-play-btn" id="playBtn">
+            <i class="fas fa-play"></i>
+        </button>
+        
+        <div class="hero-content">
+            <h1>RYOTARO</h1>
+            <div class="hero-subtitle">Professional Dancer & Choreographer</div>
+            <div class="hero-description">
+                15年の豊富な経験を持つプロダンサー。BTS、嵐、Mrs. GREEN APPLEなど、<br>
+                数多くの有名アーティストと共演し、振付師としても活動中。
+            </div>
+            <a href="#about" class="cta-button">More About Me</a>
+        </div>
+    </section>
+
+    <!-- About Section -->
+    <section id="about" class="about section">
+        <div class="container">
+            <h2 class="section-title">About Me</h2>
+            <div class="about-content">
+                <div>
+                    <img src="images/IMG_2253.jpg" alt="RYOTARO" class="about-image">
+                </div>
+                <div class="about-text">
+                    <h3>プロフェッショナルダンサー・振付師</h3>
+                    <p>
+                        2014年にJSDA(日本ストリートダンス協会)公認インストラクターライセンスを取得し、
+                        以来15年間にわたってプロダンサーとして活動しています。
+                    </p>
+                    <p>
+                        J-POP、K-POP、声優アーティストなど幅広いジャンルで、バックダンサーや振付師として
+                        多数の有名アーティストと共演。特にポップなダンススタイルを得意としています。
+                    </p>
+                    <p>
+                        「一緒に楽しく、アツくダンスをしましょう！」をモットーに、
+                        ダンスの魅力を多くの人に伝える活動を続けています。
+                    </p>
+                    
+                    <div class="stats">
+                        <div class="stat">
+                            <div class="stat-number">15+</div>
+                            <div class="stat-label">Years Experience</div>
+                        </div>
+                        <div class="stat">
+                            <div class="stat-number">50+</div>
+                            <div class="stat-label">Artist Collaborations</div>
+                        </div>
+                        <div class="stat">
+                            <div class="stat-number">100+</div>
+                            <div class="stat-label">Performances</div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Experience Section -->
+    <section id="experience" class="experience section">
+        <div class="container">
+            <h2 class="section-title">Experience</h2>
+            <div class="experience-grid">
+                <div class="experience-card">
+                    <div class="card-icon">
+                        <i class="fas fa-music"></i>
+                    </div>
+                    <h3 class="card-title">Major Artist Collaborations</h3>
+                    <ul class="card-list">
+                        <li>BTS WORLD TOUR LOVE YOURSELF (東京ドーム)</li>
+                        <li>嵐 - Various Tours & Performances</li>
+                        <li>Mrs. GREEN APPLE - Live Performances</li>
+                        <li>三浦大知 - Back Dancer</li>
+                        <li>2PM - Concert Tours</li>
+                        <li>内田雄馬 - Voice Actor Artist Performances</li>
+                    </ul>
+                </div>
+
+                <div class="experience-card">
+                    <div class="card-icon">
+                        <i class="fas fa-music"></i>
+                    </div>
+                    <h3 class="card-title">Choreography Works</h3>
+                    <ul class="card-list">
+                        <li>ポルカドットスティングレイ「バケノカワ」振付</li>
+                        <li>Various Music Video Choreography</li>
+                        <li>YouTuber Dance Content Creation</li>
+                        <li>Original Choreography for Live Performances</li>
+                        <li>Commercial & Advertisement Dance Sequences</li>
+                    </ul>
+                </div>
+
+                <div class="experience-card">
+                    <div class="card-icon">
+                        <i class="fas fa-star"></i>
+                    </div>
+                    <h3 class="card-title">Special Performances</h3>
+                    <ul class="card-list">
+                        <li>SM TOWN LIVE WORLD TOUR VI (東方神起 YUNHO)</li>
+                        <li>PENTAGON Concert Tours</li>
+                        <li>(G)I-DLE Live Performances</li>
+                        <li>HIKAKIN & SEIKIN Collaborations</li>
+                        <li>MYNAME Concert Tours</li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Videos Section -->
+    <section id="videos" class="videos section">
+        <div class="container">
+            <h2 class="section-title">Featured Performances</h2>
+            <div class="videos-grid">
+                <div class="video-card">
+                    <div class="video-wrapper">
+                        <div class="video-thumbnail" onclick="openYouTube('https://youtu.be/x2rvSf0STBM')">
+                            <img src="https://img.youtube.com/vi/x2rvSf0STBM/maxresdefault.jpg" alt="Mrs. GREEN APPLE - ダンスホール" style="width: 100%; height: 100%; object-fit: cover;">
+                            <div class="play-overlay">
+                                <i class="fab fa-youtube"></i>
+                                <span>YouTubeで見る</span>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="video-info">
+                        <h3 class="video-title">ダンスホール</h3>
+                        <div class="video-artist">Mrs. GREEN APPLE</div>
+                        <p class="video-description">
+                            人気バンドMrs. GREEN APPLEの楽曲「ダンスホール」のミュージックビデオにバックダンサーとして出演。
+                            エネルギッシュなパフォーマンスで楽曲の世界観を表現しています。
+                        </p>
+                    </div>
+                </div>
+
+                <div class="video-card">
+                    <div class="video-wrapper">
+                        <iframe 
+                            src="https://www.youtube.com/embed/ZKS-jf1c9rM?rel=0&modestbranding=1" 
+                            title="嵐 - Find The Answer" 
+                            frameborder="0"
+                            allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+                            allowfullscreen>
+                        </iframe>
+                    </div>
+                    <div class="video-info">
+                        <h3 class="video-title">Find The Answer</h3>
+                        <div class="video-artist">嵐</div>
+                        <p class="video-description">
+                            国民的アイドルグループ嵐の楽曲「Find The Answer」のミュージックビデオに出演。
+                            洗練されたダンスパフォーマンスで楽曲に華を添えています。
+                        </p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Skills Section -->
+    <section id="skills" class="skills section">
+        <div class="container">
+            <h2 class="section-title">Skills & Expertise</h2>
+            <div class="skills-grid">
+                <div class="skill-card">
+                    <div class="skill-icon">
+                        <i class="fas fa-users"></i>
+                    </div>
+                    <h3 class="skill-title">Pop Dance</h3>
+                    <p>エネルギッシュでキャッチーなポップダンススタイルを得意とし、観客を魅了するパフォーマンスを提供。</p>
+                </div>
+
+                <div class="skill-card">
+                    <div class="skill-icon">
+                        <i class="fas fa-globe-asia"></i>
+                    </div>
+                    <h3 class="skill-title">J-POP & K-POP</h3>
+                    <p>J-POPとK-POPの両方に精通し、各ジャンルの特徴を活かした振付とパフォーマンスを展開。</p>
+                </div>
+
+                <div class="skill-card">
+                    <div class="skill-icon">
+                        <i class="fas fa-microphone"></i>
+                    </div>
+                    <h3 class="skill-title">Voice Actor Artists</h3>
+                    <p>声優アーティストとの共演経験豊富で、アニメ・ゲーム関連のパフォーマンスにも対応。</p>
+                </div>
+
+                <div class="skill-card">
+                    <div class="skill-icon">
+                        <i class="fas fa-chalkboard-teacher"></i>
+                    </div>
+                    <h3 class="skill-title">Dance Instruction</h3>
+                    <p>JSDA公認インストラクターとして、初心者から上級者まで幅広いレベルの指導が可能。</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Contact Section -->
+    <section id="contact" class="contact section">
+        <div class="container">
+            <h2 class="section-title">Get In Touch</h2>
+            <p style="font-size: 1.2rem; margin-bottom: 2rem;">
+                レッスンのご依頼やコラボレーションのお問い合わせは、<br>
+                以下のSNSからお気軽にご連絡ください。
+            </p>
+            
+            <div class="social-links">
+                <a href="https://www.instagram.com/ryotaro_shimashima/" target="_blank" class="social-link">
+                    <i class="fab fa-instagram"></i>
+                </a>
+                <a href="https://x.com/ryotaro1_2_2_8" target="_blank" class="social-link">
+                    <i class="fab fa-twitter"></i>
+                </a>
+                <a href="https://lit.link/ryotaroshimashima" target="_blank" class="social-link">
+                    <i class="fas fa-link"></i>
+                </a>
+                <a href="https://dancemaster.avex.jp/instructor/profile/?id=1296&logo=1" target="_blank" class="social-link">
+                    <i class="fas fa-user"></i>
+                </a>
+            </div>
+        </div>
+    </section>
+
+    <script>
+        // Video control system
+        const video = document.querySelector('.hero-video');
+        const playBtn = document.getElementById('playBtn');
+        let hasPlayed = false;
+
+        // Check if device is mobile
+        function isMobile() {
+            return /Android|webOS|iPhone|iPad|iPod|BlackBerry|IEMobile|Opera Mini/i.test(navigator.userAgent);
+        }
+
+        // Play video function
+        function playVideo() {
+            if (video && !hasPlayed) {
+                console.log('🎬 Attempting to play video...');
+                
+                video.muted = true;
+                video.load(); // Reload video to ensure it's ready
+                
+                const playPromise = video.play();
+                
+                if (playPromise !== undefined) {
+                    playPromise.then(() => {
+                        hasPlayed = true;
+                        playBtn.style.display = 'none';
+                        console.log('✅ Video playing successfully!');
+                    }).catch(error => {
+                        console.log('❌ Autoplay failed:', error);
+                        if (isMobile()) {
+                            playBtn.classList.add('show');
+                        }
+                    });
+                }
+            }
+        }
+
+        // Initialize video
+        document.addEventListener('DOMContentLoaded', function() {
+            console.log('📱 Device type:', isMobile() ? 'Mobile' : 'Desktop');
+            
+            // Try autoplay (will likely fail on mobile)
+            setTimeout(() => {
+                playVideo();
+            }, 1000);
+            
+            // Show play button on mobile by default
+            if (isMobile()) {
+                playBtn.classList.add('mobile');
+            }
+        });
+
+        // Play button click handler
+        playBtn.addEventListener('click', function() {
+            console.log('🎯 Play button clicked');
+            playVideo();
+        });
+
+        // Smooth scrolling for navigation links
+        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+            anchor.addEventListener('click', function (e) {
+                e.preventDefault();
+                const target = document.querySelector(this.getAttribute('href'));
+                if (target) {
+                    target.scrollIntoView({
+                        behavior: 'smooth'
+                    });
+                }
+            });
+        });
+
+        // Navbar background opacity on scroll
+        window.addEventListener('scroll', function() {
+            const navbar = document.querySelector('.navbar');
+            if (window.scrollY > 50) {
+                navbar.style.background = 'rgba(255, 255, 255, 0.98)';
+            } else {
+                navbar.style.background = 'rgba(255, 255, 255, 0.95)';
+            }
+        });
+
+        // Animate elements on scroll
+        const observerOptions = {
+            threshold: 0.1,
+            rootMargin: '0px 0px -50px 0px'
+        };
+
+        const observer = new IntersectionObserver(function(entries) {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    entry.target.style.opacity = '1';
+                    entry.target.style.transform = 'translateY(0)';
+                }
+            });
+        }, observerOptions);
+
+        // Observe all cards and sections
+        document.querySelectorAll('.experience-card, .skill-card, .video-card').forEach(el => {
+            el.style.opacity = '0';
+            el.style.transform = 'translateY(30px)';
+            el.style.transition = 'opacity 0.6s ease, transform 0.6s ease';
+            observer.observe(el);
+        });
+
+        // Open YouTube video in new tab
+        function openYouTube(url) {
+            window.open(url, '_blank');
+        }
+    </script>
+</body>
+</html>
